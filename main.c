@@ -3,13 +3,10 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "DeviceConfig.h"
-
-#define LIGHT LATFbits.LATF0
-#define ON 1
-#define OFF 0
+#include "delay.h"
 
 void main(){
-	// Ustaw porty jako cyfrowe
+	// Set ports as digital
     ANSELA = 0;
     ANSELB = 0;
     ANSELC = 0;
@@ -18,9 +15,14 @@ void main(){
 	
 	Set_MaxSpeed_Mode();
     
-    TRISFbits.TRISF0 = 0; // Port F pin 0 as output
-	
+    TRISFbits.TRISF0 = 0;   // Port F pin 0 as output
+    TRISFbits. TRISF1 = 1;  // Port F pin 1 as input
+    CNPUFbits.CNPUF1 = 1;   // Pull-up resistor enable for pin RF1
+    
 	while (1){
-        LIGHT = ON;
+        if(PORTFbits.RF1 == 0){
+            PORTFINV = 1;
+            delay_ms(300);
+        }
 	}
 }
