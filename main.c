@@ -20,9 +20,11 @@ void main(){
     CNPUFbits.CNPUF1 = 1;   // Pull-up resistor enable for pin RF1
     
 	while (1){
-        if(PORTFbits.RF1 == 0){
-            PORTFINV = 1;
-            delay_ms(300);
-        }
+//        if(PORTFbits.RF1 == 0){
+//            PORTFINV = 1;
+//            delay_ms(300);
+//        }
+        PORTFINV = 1;
+        delay_ms(100);
 	}
 }
